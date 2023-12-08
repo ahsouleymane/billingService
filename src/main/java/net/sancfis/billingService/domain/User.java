@@ -10,11 +10,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
+
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@JsonInclude(NON_DEFAULT)
 public class User {
     private Long id;
     @NotEmpty(message = "Le prénom est obligatoire")
@@ -35,11 +37,5 @@ public class User {
     private Boolean isNotLocked;
     private Boolean isUsingMfa;
     private LocalDateTime createdAt;
-
-
-
-
-
-
 
 }
