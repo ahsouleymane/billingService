@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
+import static java.util.Map.of;
 import static java.util.Objects.requireNonNull;
 import static net.sancfis.billingService.enumeration.RoleType.ROLE_USER;
 import static net.sancfis.billingService.enumeration.VerificationType.ACCOUNT;
@@ -50,6 +51,7 @@ public class UserRepositoryImp implements UserRepository<User> {
             // Envoyer l'URL de vérification
             String verificationUrl = getVerificationUrl(UUID.randomUUID().toString(), ACCOUNT.getType());
             // Enregistrer l'URL dans la table de verification
+            jdbc.update(INSERT_ACCOUNT_VERIFICATION_URL_QUERY, of("userId", user.getId(), "url", verificationUrl));
             // Envoyer un email à l'utilisateur avec l'URL de verification
             // renvoyer l'utilisateur nouvellement créé
             // S'il y a des erreurs, lancez une exception avec le message approprié
@@ -83,7 +85,7 @@ public class UserRepositoryImp implements UserRepository<User> {
     }
 
     private Integer getEmailCount(String email) {
-        return jdbc.queryForObject(CONST_USER_EMAIL_QUERY, Map.of("email", email), Integer.class);
+        return jdbc.queryForObject(CONST_USER_EMAIL_QUERY, of("email", email), Integer.class);
     }
 
     private SqlParameterSource getSqlParameterSource(User user) {
