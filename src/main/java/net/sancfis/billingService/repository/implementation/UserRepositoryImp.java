@@ -18,12 +18,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.UUID;
 
 import static java.util.Map.of;
 import static java.util.Objects.requireNonNull;
-import static net.sancfis.billingService.enumeration.RoleType.ROLE_USER;
+import static net.sancfis.billingService.enumeration.RoleType.*;
 import static net.sancfis.billingService.enumeration.VerificationType.ACCOUNT;
 import static net.sancfis.billingService.query.UserQuery.*;
 
@@ -39,7 +38,7 @@ public class UserRepositoryImp implements UserRepository<User> {
     @Override
     public User create(User user) {
         // Vérifiez que l'e-mail est unique
-        if(getEmailCount(user.getEmail().trim().toLowerCase()) > 0) throw new ApiException("Email déja utilisé !!! Réessayer.");
+        if(getEmailCount(user.getEmail().trim().toLowerCase()) > 0) throw new ApiException("Email déja utilisé ! Réessayer.");
         // Enregistrer un nouvel utilisateur
         try {
             KeyHolder holder = new GeneratedKeyHolder();
@@ -53,15 +52,18 @@ public class UserRepositoryImp implements UserRepository<User> {
             // Enregistrer l'URL dans la table de verification
             jdbc.update(INSERT_ACCOUNT_VERIFICATION_URL_QUERY, of("userId", user.getId(), "url", verificationUrl));
             // Envoyer un email à l'utilisateur avec l'URL de verification
+            //emailService.sendVerificationUrl(user.getFirstName(), user.getEmail(), verificationUrl, ACCOUNT);
+            user.setEnabled(false);
+            user.setNotLocked(true);
             // renvoyer l'utilisateur nouvellement créé
+            return user;
             // S'il y a des erreurs, lancez une exception avec le message approprié
         }catch (EmptyResultDataAccessException exception) {
-
+            throw new ApiException("Aucun rôle trouvé pour le nom: " + ROLE_USER.name());
         } catch (Exception exception) {
-
+            throw new ApiException("Une erreur est survenue ! Réessayer.");
         }
 
-        return null;
     }
 
     @Override

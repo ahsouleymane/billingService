@@ -34,8 +34,8 @@ public class User {
     private String bio;
     private String imageUrl;
     private Boolean enabled;
-    private Boolean isNotLocked;
-    private Boolean isUsingMfa;
+    private Boolean notLocked;
+    private Boolean usingMfa;
     private LocalDateTime createdAt;
 
 }
