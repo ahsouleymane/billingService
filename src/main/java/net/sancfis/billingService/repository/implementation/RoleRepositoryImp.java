@@ -12,18 +12,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 import static net.sancfis.billingService.enumeration.RoleType.ROLE_USER;
+import static net.sancfis.billingService.query.RoleQuery.*;
 
 @Repository
 @RequiredArgsConstructor
 @Slf4j
 public class RoleRepositoryImp implements RoleRepository<Role> {
 
-    private static final String INSERT_ROLE_TO_USER_QUERY = "";
-    private static final String SELECT_ROLE_BY_NAME_QUERY = "";
     private final NamedParameterJdbcTemplate jdbc;
     @Override
     public Role create(Role data) {
