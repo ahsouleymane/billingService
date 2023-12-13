@@ -52,7 +52,7 @@ public class RoleRepositoryImp implements RoleRepository<Role> {
     public void addRoleToUser(Long userId, String roleName) {
         log.info("Ajout d'un rôle {} à l'identifiant de l'utilisateur {}", roleName, userId);
         try{
-            Role role = jdbc.queryForObject(SELECT_ROLE_BY_NAME_QUERY, Map.of("roleName",roleName), new RoleRowMapper());
+            Role role = jdbc.queryForObject(SELECT_ROLE_BY_NAME_QUERY, Map.of("name",roleName), new RoleRowMapper());
             jdbc.update(INSERT_ROLE_TO_USER_QUERY, Map.of("userId", userId, "roleId", requireNonNull(role).getId()));
 
         }catch (

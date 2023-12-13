@@ -58,9 +58,10 @@ public class UserRepositoryImp implements UserRepository<User> {
             // renvoyer l'utilisateur nouvellement créé
             return user;
             // S'il y a des erreurs, lancez une exception avec le message approprié
-        }catch (EmptyResultDataAccessException exception) {
-            throw new ApiException("Aucun rôle trouvé pour le nom: " + ROLE_USER.name());
+        /*}catch (EmptyResultDataAccessException exception) {
+            throw new ApiException("Aucun rôle trouvé pour le nom: " + ROLE_USER.name());*/
         } catch (Exception exception) {
+            log.error(exception.getMessage());
             throw new ApiException("Une erreur est survenue ! Réessayer.");
         }
 
