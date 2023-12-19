@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.Map;
 
+import static java.util.Map.of;
 import static java.util.Objects.requireNonNull;
 import static net.sancfis.billingService.enumeration.RoleType.ROLE_USER;
 import static net.sancfis.billingService.query.RoleQuery.*;
@@ -52,7 +53,7 @@ public class RoleRepositoryImp implements RoleRepository<Role> {
     public void addRoleToUser(Long userId, String roleName) {
         log.info("Ajout d'un rôle {} à l'identifiant de l'utilisateur {}", roleName, userId);
         try{
-            Role role = jdbc.queryForObject(SELECT_ROLE_BY_NAME_QUERY, Map.of("name",roleName), new RoleRowMapper());
+            Role role = jdbc.queryForObject(SELECT_ROLE_BY_NAME_QUERY, of("name",roleName), new RoleRowMapper());
             jdbc.update(INSERT_ROLE_TO_USER_QUERY, Map.of("userId", userId, "roleId", requireNonNull(role).getId()));
 
         }catch (

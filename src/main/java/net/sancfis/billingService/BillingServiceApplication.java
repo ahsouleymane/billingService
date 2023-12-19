@@ -17,7 +17,7 @@ public class BillingServiceApplication {
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		return  new BCryptPasswordEncoder(STRENGHT);
+		return new BCryptPasswordEncoder(STRENGHT);
 	}
 
 }

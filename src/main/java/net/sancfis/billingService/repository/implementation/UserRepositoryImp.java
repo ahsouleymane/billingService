@@ -7,7 +7,6 @@ import net.sancfis.billingService.domain.User;
 import net.sancfis.billingService.exception.ApiException;
 import net.sancfis.billingService.repository.RoleRepository;
 import net.sancfis.billingService.repository.UserRepository;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
