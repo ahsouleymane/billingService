@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="springBootConfigurationType" factoryName="Spring Boot">
+    <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../Program Files/Java/jdk-17" />
+    <option name="MAIN_CLASS_NAME" value="net.sancfis.billingService.BillingServiceApplication" />
+    <module name="billingService" />
+    <selectedOptions>
+      <option name="environmentVariables" visible="false" />
+    </selectedOptions>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
